@@ -49,7 +49,6 @@ attr_writer :cashed_in
     db.close
 
     final_result = hashes.map{|hash| Bounty.new(hash)}
-    # binding.pry
     return nil if final_result == []
     return final_result
   end
@@ -63,6 +62,5 @@ attr_writer :cashed_in
     final_result = hashes.map{|hash| Bounty.new(hash)}
 
   end
-
 
 end
