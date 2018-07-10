@@ -14,3 +14,5 @@ bounty2.cashed_in = 'true'
 bounty2.update()
 
 bounty1.delete()
+
+p Bounty.find_by_name('Jerry Boba')

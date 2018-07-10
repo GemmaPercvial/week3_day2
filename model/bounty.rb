@@ -1,4 +1,5 @@
 require ('pg')
+require('pry-byebug')
 class Bounty
 
 attr_writer :cashed_in
@@ -40,6 +41,28 @@ attr_writer :cashed_in
     db.close()
   end
 
+  def Bounty.find_by_name(name)
+    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost' })
+    sql = "SELECT * FROM bounties WHERE name = '#{name}'"
+    db.prepare('result', sql)
+    hashes = db.exec_prepared('result')
+    db.close
+
+    final_result = hashes.map{|hash| Bounty.new(hash)}
+    # binding.pry
+    return nil if final_result == []
+    return final_result
+  end
+
+  def Bounty.find_by_id(id)
+    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost' })
+    sql = "SELECT * FROM bounties WHERE id = '#{id}'"
+    db.prepare('result', sql)
+    hashes = db.exec_prepared('result')
+    db.close
+    final_result = hashes.map{|hash| Bounty.new(hash)}
+
+  end
 
 
 end
